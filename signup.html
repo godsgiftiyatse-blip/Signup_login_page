@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account</title>
+
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
+
+    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
+</head>
+
 <body>
 
 <div class="container">
@@ -17,38 +20,33 @@
         <h1>Create Account</h1>
         <p class="subtitle">Join the community today</p>
 
-        <form>
+        <form onsubmit="handleSignup(event)">
+
             <div class="input-group">
                 <label>Full Name</label>
-                <input type="text" placeholder="Enter your full name">
+                <input id="fullName" type="text" placeholder="Enter your full name" required>
             </div>
 
             <div class="input-group">
                 <label>Email Address</label>
-                <input type="email" placeholder="Enter your email">
+                <input id="signupEmail" type="email" placeholder="Enter your email" required>
             </div>
 
             <div class="input-group">
                 <label>Password</label>
-                <input type="password" placeholder="Create a password">
+                <input id="signupPassword" type="password" placeholder="Create a password" required>
             </div>
 
             <div class="input-group">
                 <label>Confirm Password</label>
-                <input type="password" placeholder="Confirm password">
+                <input id="confirmPassword" type="password" placeholder="Confirm password" required>
             </div>
 
-            <button type="submit" class="btn">
+            <button type="submit" class="btn" id="signupBtn">
                 Create Account
             </button>
+
         </form>
-
-        <div class="divider">
-            <span>OR</span>
-        </div>
-
-        <button class="social-btn">Continue with Google</button>
-        <button class="social-btn">Continue with GitHub</button>
 
         <p class="bottom-text">
             Already have an account?
@@ -57,6 +55,62 @@
 
     </div>
 </div>
+
+<script>
+// =====================
+// SUPABASE SETUP
+// =====================
+const supabaseUrl = "https://hcgmpsmiqpinayzkvavd.supabase.co";
+const supabaseKey = "YOUR_ANON_KEY"; // replace this
+
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+
+// =====================
+// SIGNUP FUNCTION
+// =====================
+async function handleSignup(event) {
+    event.preventDefault();
+
+    const btn = document.getElementById("signupBtn");
+    btn.disabled = true;
+    btn.innerText = "Creating account...";
+
+    const fullName = document.getElementById("fullName").value;
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    // basic validation
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        btn.disabled = false;
+        btn.innerText = "Create Account";
+        return;
+    }
+
+    // Supabase signup
+    const { data, error } = await supabase.auth.signUp({
+        email: email.trim(),
+        password: password.trim(),
+        options: {
+            data: {
+                full_name: fullName
+            }
+        }
+    });
+
+    if (error) {
+        alert(error.message);
+        btn.disabled = false;
+        btn.innerText = "Create Account";
+        return;
+    }
+
+    alert("Check your email to confirm your account!");
+    window.location.href = "login.html";
+}
+</script>
 
 </body>
 </html>
