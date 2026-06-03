@@ -1,10 +1,11 @@
 // =====================
-// SUPABASE SETUP
+// SUPABASE INIT (FIXED)
 // =====================
-const supabaseUrl = "https://hcgmpsmiqpinayzkvavd.supabase.co";
-const supabaseKey = "sb_publishable_mmAQ4xNdT_acLKyIN9b9Qw_o3nPTSBj";
+const SUPABASE_URL = "https://hcgmpsmiqpinayzkvavd.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_mmAQ4xNdT_acLKyIN9b9Qw_o3nPTSBj";
 
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+// IMPORTANT: use window.supabase (from CDN)
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 
 
@@ -18,7 +19,7 @@ async function signup(email, password) {
     });
 
     if (error) {
-        alert(error.message);
+        alert("Signup failed: " + error.message);
         return;
     }
 
@@ -38,7 +39,7 @@ async function login(email, password) {
     });
 
     if (error) {
-        alert(error.message);
+        alert("Login failed: " + error.message);
         return;
     }
 
@@ -58,8 +59,10 @@ async function checkUser() {
         return;
     }
 
-    document.getElementById("userText").innerText =
-        "Logged in as: " + data.user.email;
+    const el = document.getElementById("userText");
+    if (el) {
+        el.innerText = "Logged in as: " + data.user.email;
+    }
 }
 
 
