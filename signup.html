@@ -1,20 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Signup</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
 
+    <!-- Supabase MUST load first -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
+
+    <!-- Your logic file -->
+    <script src="script.js" defer></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+        }
+
+        .box {
+            width: 300px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #22c55e;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #16a34a;
+        }
+    </style>
 </head>
 
 <body>
 
-<h2>Sign Up</h2>
+<div class="box">
+    <h2>Create Account</h2>
 
-<input id="email" type="email" placeholder="Email"><br><br>
-<input id="password" type="password" placeholder="Password"><br><br>
+    <input id="email" type="email" placeholder="Email" required>
+    <input id="password" type="password" placeholder="Password" required>
 
-<button onclick="handleSignup()">Create Account</button>
+    <button onclick="handleSignup()">Sign Up</button>
+</div>
 
 <script>
 function handleSignup() {
@@ -23,6 +69,11 @@ function handleSignup() {
 
     if (!email || !password) {
         alert("Please fill all fields");
+        return;
+    }
+
+    if (typeof signup !== "function") {
+        alert("Signup function not loaded. Check script.js");
         return;
     }
 
