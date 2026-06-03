@@ -3,81 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Create Account</title>
 
-    <!-- Supabase MUST load first -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- Your logic file -->
     <script src="script.js" defer></script>
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: #0f172a;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
         }
 
-        .box {
-            width: 300px;
-            padding: 20px;
+        .card {
+            width: 340px;
+            padding: 25px;
+            border-radius: 12px;
             background: rgba(255,255,255,0.05);
-            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
             text-align: center;
+            margin-bottom: 15px;
         }
 
         input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 8px 0;
+            border: none;
+            border-radius: 6px;
+            outline: none;
         }
 
         button {
             width: 100%;
-            padding: 10px;
-            background: #22c55e;
+            padding: 12px;
+            margin-top: 10px;
             border: none;
+            border-radius: 6px;
+            background: #22c55e;
             color: white;
+            font-weight: bold;
             cursor: pointer;
         }
 
-        button:hover {
-            background: #16a34a;
+        button:disabled {
+            background: #64748b;
+            cursor: not-allowed;
+        }
+
+        .error {
+            color: #f87171;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="card">
     <h2>Create Account</h2>
 
-    <input id="email" type="email" placeholder="Email" required>
-    <input id="password" type="password" placeholder="Password" required>
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+    <input id="confirmPassword" type="password" placeholder="Confirm Password">
 
-    <button onclick="handleSignup()">Sign Up</button>
+    <button id="signupBtn" onclick="handleSignup()">Sign Up</button>
+
+    <p id="errorText" class="error"></p>
 </div>
 
 <script>
-function handleSignup() {
+async function handleSignup() {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
+    const confirmPassword = document.getElementById("confirmPassword").value.trim();
 
-    if (!email || !password) {
-        alert("Please fill all fields");
+    const btn = document.getElementById("signupBtn");
+    const errorText = document.getElementById("errorText");
+
+    errorText.innerText = "";
+
+    // validation
+    if (!email || !password || !confirmPassword) {
+        errorText.innerText = "Please fill in all fields";
         return;
     }
 
+    if (password !== confirmPassword) {
+        errorText.innerText = "Passwords do not match";
+        return;
+    }
+
+    // safety check
     if (typeof signup !== "function") {
-        alert("Signup function not loaded. Check script.js");
+        errorText.innerText = "Signup system not loaded (check script.js)";
         return;
     }
 
-    signup(email, password);
+    btn.disabled = true;
+    btn.innerText = "Creating account...";
+
+    try {
+        await signup(email, password);
+    } catch (err) {
+        console.error(err);
+        errorText.innerText = "Signup failed. Try again.";
+    } finally {
+        btn.disabled = false;
+        btn.innerText = "Sign Up";
+    }
 }
 </script>
 
