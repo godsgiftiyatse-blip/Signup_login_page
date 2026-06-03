@@ -1,32 +1,29 @@
-const supabaseUrl = 'https://hcgmpsmiqpinayzkvavd.supabase.co';
-
-const supabaseKey = 'sb_publishable_mmAQ4xNdT_acLKyIN9b9Qw_o3nPTSBj';
-
-const supabase = window.supabase.createClient(
-  supabaseUrl,
-  supabaseKey
-);// =====================
-// BASE API
 // =====================
-const API_URL = "https://YOUR-REPLIT-URL.replit.app/api/auth";
+// SUPABASE INIT
+// =====================
+const supabaseUrl = "https://hcgmpsmiqpinayzkvavd.supabase.co";
+const supabaseKey = "sb_publishable_mmAQ4xNdT_acLKyIN9b9Qw_o3nPTSBj";
 
-async function apiRequest(endpoint, body) {
-  try {
-    const res = await fetch(`${API_URL}/${endpoint}`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(body)
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+
+// =====================
+// SIGNUP
+// =====================
+async function signup(email, password) {
+    const { data, error } = await supabase.auth.signUp({
+        email: email.trim(),
+        password: password.trim()
     });
 
-    const data = await res.json();
-    return { ok: res.ok, data };
+    if (error) {
+        alert(error.message);
+        return;
+    }
 
-  } catch (error) {
-    return { ok: false, data: { error: "Network error" } };
-  }
+    console.log("Signup success:", data);
+    alert("Account created! Check your email.");
+    window.location.href = "login.html";
 }
 
 
@@ -34,72 +31,108 @@ async function apiRequest(endpoint, body) {
 // LOGIN
 // =====================
 async function login(email, password) {
-  const result = await apiRequest("login", {
-    email: email.trim(),
-    password: password.trim()
-  });
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password: password.trim()
+    });
 
-  if (!result.ok) {
-    alert(result.data.error || "Login failed");
-    return;
-  }
+    if (error) {
+        alert(error.message);
+        return;
+    }
 
-  console.log("Logged in as:", result.data.email);
-  window.location.href = "dashboard.html";
+    console.log("Login success:", data.user.email);
+    window.location.href = "dashboard.html";
 }
 
 
 // =====================
-// SIGNUP
+// LOGOUT
 // =====================
-async function signup(email, password) {
-  const result = await apiRequest("signup", {
-    email: email.trim(),
-    password: password.trim()
-  });
+async function logout() {
+    await supabase.auth.signOut();
+    window.location.href = "login.html";
+}
 
-  if (!result.ok) {
-    alert(result.data.error || "Signup failed");
-    return;
-  }
 
-  console.log("Account created for:", result.data.email);
-  window.location.href = "login.html";
+// =====================
+// GET CURRENT USER
+// =====================
+async function getUser() {
+    const { data } = await supabase.auth.getUser();
+    return data.user;
+}
+
+
+// =====================
+// PROTECT PAGE (DASHBOARD)
+// =====================
+async function protectPage() {
+    const { data } = await supabase.auth.getSession();
+
+    if (!data.session) {
+        window.location.href = "login.html";
+    }
 }
 
 
 // =====================
 // FORM HANDLERS
 // =====================
-function handleLogin(event) {
-  event.preventDefault();
 
-  const button = event.target.querySelector("button");
-  button.disabled = true;
-  button.innerText = "Logging in...";
+// LOGIN FORM
+async function handleLogin(event) {
+    event.preventDefault();
 
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
+    const button = event.target.querySelector("button");
+    button.disabled = true;
+    button.innerText = "Logging in...";
 
-  login(email, password).finally(() => {
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    await login(email, password);
+
     button.disabled = false;
     button.innerText = "Login";
-  });
 }
 
 
-function handleSignup(event) {
-  event.preventDefault();
+// SIGNUP FORM
+async function handleSignup(event) {
+    event.preventDefault();
 
-  const button = event.target.querySelector("button");
-  button.disabled = true;
-  button.innerText = "Creating account...";
+    const button = event.target.querySelector("button");
+    button.disabled = true;
+    button.innerText = "Creating account...";
 
-  const email = document.getElementById("signupEmail").value;
-  const password = document.getElementById("signupPassword").value;
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
 
-  signup(email, password).finally(() => {
+    await signup(email, password);
+
     button.disabled = false;
     button.innerText = "Sign Up";
-  });
+}
+
+
+// =====================
+// QUICK LOGIN TEST (OPTIONAL)
+// =====================
+async function testLogin() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    alert("Login successful!");
+    window.location.href = "dashboard.html";
 }
