@@ -1,51 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sign Up</title>
-
-  <link rel="stylesheet" href="login.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-  <div class="login-container">
-    <h2>Create Account</h2>
+<div class="container">
+    <div class="auth-card">
 
-    <form onsubmit="handleSignup(event)">
+        <h1>Create Account</h1>
+        <p class="subtitle">Join the community today</p>
 
-      <div class="input-box">
-        <label>Email</label>
-        <input 
-          type="email" 
-          id="signupEmail" 
-          placeholder="Enter your email"
-          required
-        >
-      </div>
+        <form>
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="Enter your full name">
+            </div>
 
-      <div class="input-box">
-        <label>Password</label>
-        <input 
-          type="password" 
-          id="signupPassword" 
-          placeholder="Create a password"
-          required
-        >
-      </div>
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="Enter your email">
+            </div>
 
-      <button type="submit">Sign Up</button>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" placeholder="Create a password">
+            </div>
 
-    </form>
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <input type="password" placeholder="Confirm password">
+            </div>
 
-    <div class="extra">
-      Already have an account?
-      <a href="login.html">Login</a>
+            <button type="submit" class="btn">
+                Create Account
+            </button>
+        </form>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <button class="social-btn">Continue with Google</button>
+        <button class="social-btn">Continue with GitHub</button>
+
+        <p class="bottom-text">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+
     </div>
-  </div>
-
-  <script src="script.js"></script>
+</div>
 
 </body>
 </html>
