@@ -8,43 +8,41 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       background: linear-gradient(135deg, #0f172a, #1e293b);
-      font-family: Arial, sans-serif;
-      color: white;
+      color: #fff;
     }
 
-    .card {
+    .dashboard {
       text-align: center;
       padding: 30px;
       border-radius: 12px;
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       width: 90%;
       max-width: 500px;
     }
 
-    h1 {
-      margin-bottom: 10px;
-    }
-
-    p {
-      opacity: 0.85;
-      margin-bottom: 20px;
-    }
-
     button {
-      padding: 12px 18px;
+      padding: 12px 20px;
       border: none;
       border-radius: 8px;
       background: #ef4444;
       color: white;
       cursor: pointer;
+      font-size: 1rem;
     }
 
     button:hover {
@@ -55,12 +53,12 @@
 
 <body>
 
-<div class="card">
-  <h1>Dashboard 👋</h1>
-  <p id="userInfo">Loading user...</p>
+  <div class="dashboard">
+    <h1>Welcome 👋</h1>
+    <p id="userText">Checking session...</p>
 
-  <button onclick="logout()">Logout</button>
-</div>
+    <button onclick="logout()">Logout</button>
+  </div>
 
 <script>
   // =====================
@@ -73,7 +71,7 @@
 
 
   // =====================
-  // LOAD USER + PROTECT PAGE
+  // CHECK USER SESSION
   // =====================
   async function loadUser() {
     const { data, error } = await supabase.auth.getUser();
@@ -83,14 +81,8 @@
       return;
     }
 
-    const user = data.user;
-
-    const fullName = user.user_metadata?.full_name;
-
-    document.getElementById("userInfo").innerText =
-      fullName
-        ? `Welcome ${fullName} (${user.email})`
-        : `Logged in as: ${user.email}`;
+    document.getElementById("userText").innerText =
+      "Logged in as: " + data.user.email;
   }
 
   loadUser();
