@@ -1,4 +1,11 @@
-// =====================
+const supabaseUrl = 'https://hcgmpsmiqpinayzkvavd.supabase.co';
+
+const supabaseKey = 'sb_publishable_mmAQ4xNdT_acLKyIN9b9Qw_o3nPTSBj';
+
+const supabase = window.supabase.createClient(
+  supabaseUrl,
+  supabaseKey
+);// =====================
 // BASE API
 // =====================
 const API_URL = "https://YOUR-REPLIT-URL.replit.app/api/auth";
