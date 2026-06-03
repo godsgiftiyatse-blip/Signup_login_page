@@ -5,94 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account</title>
 
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Poppins, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+        }
+
+        .card {
+            width: 90%;
+            max-width: 400px;
+            padding: 25px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #22c55e;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #16a34a;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
-    <div class="auth-card">
+<div class="card">
+    <h1>Create Account</h1>
 
-        <h1>Create Account</h1>
-        <p class="subtitle">Join the community today</p>
+    <form onsubmit="handleSignup(event)">
 
-        <form onsubmit="handleSignup(event)">
+        <label>Full Name</label>
+        <input id="fullName" type="text" required>
 
-            <div class="input-group">
-                <label>Full Name</label>
-                <input id="fullName" type="text" placeholder="Enter your full name" required>
-            </div>
+        <label>Email</label>
+        <input id="email" type="email" required>
 
-            <div class="input-group">
-                <label>Email Address</label>
-                <input id="signupEmail" type="email" placeholder="Enter your email" required>
-            </div>
+        <label>Password</label>
+        <input id="password" type="password" required>
 
-            <div class="input-group">
-                <label>Password</label>
-                <input id="signupPassword" type="password" placeholder="Create a password" required>
-            </div>
+        <label>Confirm Password</label>
+        <input id="confirmPassword" type="password" required>
 
-            <div class="input-group">
-                <label>Confirm Password</label>
-                <input id="confirmPassword" type="password" placeholder="Confirm password" required>
-            </div>
-
-            <button type="submit" class="btn" id="signupBtn">
-                Create Account
-            </button>
-
-        </form>
-
-        <p class="bottom-text">
-            Already have an account?
-            <a href="login.html">Login</a>
-        </p>
-
-    </div>
+        <button id="btn" type="submit">Sign Up</button>
+    </form>
 </div>
 
 <script>
-// =====================
-// SUPABASE SETUP
-// =====================
+/* =====================
+   SUPABASE SETUP
+===================== */
 const supabaseUrl = "https://hcgmpsmiqpinayzkvavd.supabase.co";
-const supabaseKey = "YOUR_ANON_KEY"; // replace this
+const supabaseKey = "sb_publishable_mmAQ4xNdT_acLKyIN9b9Qw_o3nPTSBj";
 
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 
-// =====================
-// SIGNUP FUNCTION
-// =====================
+/* =====================
+   SIGNUP FUNCTION
+===================== */
 async function handleSignup(event) {
     event.preventDefault();
 
-    const btn = document.getElementById("signupBtn");
+    const btn = document.getElementById("btn");
     btn.disabled = true;
     btn.innerText = "Creating account...";
 
-    const fullName = document.getElementById("fullName").value;
-    const email = document.getElementById("signupEmail").value;
-    const password = document.getElementById("signupPassword").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
+    const fullName = document.getElementById("fullName").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const confirmPassword = document.getElementById("confirmPassword").value.trim();
 
-    // basic validation
     if (password !== confirmPassword) {
         alert("Passwords do not match!");
         btn.disabled = false;
-        btn.innerText = "Create Account";
+        btn.innerText = "Sign Up";
         return;
     }
 
-    // Supabase signup
     const { data, error } = await supabase.auth.signUp({
-        email: email.trim(),
-        password: password.trim(),
+        email,
+        password,
         options: {
             data: {
                 full_name: fullName
@@ -103,11 +129,11 @@ async function handleSignup(event) {
     if (error) {
         alert(error.message);
         btn.disabled = false;
-        btn.innerText = "Create Account";
+        btn.innerText = "Sign Up";
         return;
     }
 
-    alert("Check your email to confirm your account!");
+    alert("Account created! Check your email.");
     window.location.href = "login.html";
 }
 </script>
