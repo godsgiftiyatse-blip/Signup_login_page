@@ -1,0 +1,33 @@
+.auth-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.login-btn,
+.signup-btn{
+    text-decoration:none;
+    padding:10px 20px;
+    border-radius:5px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.login-btn{
+    background:transparent;
+    border:2px solid #38bdf8;
+    color:#38bdf8;
+}
+
+.login-btn:hover{
+    background:#38bdf8;
+    color:white;
+}
+
+.signup-btn{
+    background:#38bdf8;
+    color:white;
+}
+
+.signup-btn:hover{
+    background:#0284c7;
+}
