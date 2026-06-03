@@ -1,146 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign Up</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Godsgift Portfolio</title>
 
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
-}
-
-body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#0f172a,#1e3a8a);
-}
-
-.container{
-    width:400px;
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.3);
-}
-
-.logo{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.logo h1{
-    color:#0f172a;
-}
-
-.logo p{
-    color:gray;
-}
-
-.input-box{
-    margin-bottom:18px;
-}
-
-.input-box label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:600;
-}
-
-.input-box input{
-    width:100%;
-    padding:14px;
-    border:2px solid #ddd;
-    border-radius:10px;
-    outline:none;
-    transition:.3s;
-}
-
-.input-box input:focus{
-    border-color:#2563eb;
-}
-
-.btn{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:10px;
-    background:#2563eb;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.links{
-    text-align:center;
-    margin-top:20px;
-}
-
-.links a{
-    color:#2563eb;
-    text-decoration:none;
-}
-
-.links a:hover{
-    text-decoration:underline;
-}
-
-</style>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <div class="logo">
-        <h1>Create Account</h1>
-        <p>Join and start your journey</p>
+        <div class="logo">
+            <h1>Create Account</h1>
+            <p>Join the community</p>
+        </div>
+
+        <form>
+
+            <div class="input-box">
+                <label>Full Name</label>
+                <input
+                    type="text"
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
+
+            <div class="input-box">
+                <label>Email Address</label>
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+            <div class="input-box">
+                <label>Password</label>
+                <input
+                    type="password"
+                    placeholder="Create a password"
+                    required
+                >
+            </div>
+
+            <div class="input-box">
+                <label>Confirm Password</label>
+                <input
+                    type="password"
+                    placeholder="Confirm password"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn">
+                Create Account
+            </button>
+
+            <div class="divider">
+                OR
+            </div>
+
+            <div class="social-buttons">
+
+                <button type="button" class="social-btn">
+                    Continue with Google
+                </button>
+
+                <button type="button" class="social-btn">
+                    Continue with GitHub
+                </button>
+
+            </div>
+
+            <div class="links">
+                <p>
+                    Already have an account?
+                    <a href="login.html">Login</a>
+                </p>
+            </div>
+
+        </form>
+
     </div>
-
-    <form>
-
-        <div class="input-box">
-            <label>Full Name</label>
-            <input type="text" placeholder="Enter your full name">
-        </div>
-
-        <div class="input-box">
-            <label>Email Address</label>
-            <input type="email" placeholder="Enter your email">
-        </div>
-
-        <div class="input-box">
-            <label>Password</label>
-            <input type="password" placeholder="Create password">
-        </div>
-
-        <div class="input-box">
-            <label>Confirm Password</label>
-            <input type="password" placeholder="Confirm password">
-        </div>
-
-        <button class="btn">Create Account</button>
-
-        <div class="links">
-            <p>Already have an account?
-            <a href="login.html">Login</a></p>
-        </div>
-
-    </form>
-
-</div>
 
 </body>
 </html>
