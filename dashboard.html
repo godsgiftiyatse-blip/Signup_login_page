@@ -71,9 +71,9 @@
 
 
   // =====================
-  // CHECK USER SESSION
+  // CHECK SESSION
   // =====================
-  async function loadUser() {
+  async function checkUser() {
     const { data, error } = await supabase.auth.getUser();
 
     if (error || !data.user) {
@@ -85,7 +85,7 @@
       "Logged in as: " + data.user.email;
   }
 
-  loadUser();
+  checkUser();
 
 
   // =====================
