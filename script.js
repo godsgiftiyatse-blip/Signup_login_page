@@ -1,66 +1,60 @@
 // =====================
-// LOGIN FUNCTION
+// BASE API FUNCTION
 // =====================
-async function login(email, password) {
+const API_URL = "https://YOUR-REPLIT-URL.replit.app/api/auth";
+
+async function apiRequest(endpoint, body) {
   try {
-    const res = await fetch("https://YOUR-REPLIT-URL.replit.app/api/auth/login", {
+    const res = await fetch(`${API_URL}/${endpoint}`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify(body)
     });
 
     const data = await res.json();
 
-    if (!res.ok) {
-      alert(data.error || "Login failed");
-      return;
-    }
-
-    console.log("Logged in as:", data.email);
-
-    // redirect after login
-    window.location.href = "dashboard.html";
+    return { ok: res.ok, data };
 
   } catch (error) {
-    console.error(error);
-    alert("Network error");
+    return { ok: false, data: { error: "Network error" } };
   }
 }
 
 
 // =====================
-// SIGNUP FUNCTION
+// LOGIN
+// =====================
+async function login(email, password) {
+  const result = await apiRequest("login", { email, password });
+
+  if (!result.ok) {
+    alert(result.data.error || "Login failed");
+    return;
+  }
+
+  console.log("Logged in as:", result.data.email);
+
+  window.location.href = "dashboard.html";
+}
+
+
+// =====================
+// SIGNUP
 // =====================
 async function signup(email, password) {
-  try {
-    const res = await fetch("https://YOUR-REPLIT-URL.replit.app/api/auth/signup", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email, password })
-    });
+  const result = await apiRequest("signup", { email, password });
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      alert(data.error || "Signup failed");
-      return;
-    }
-
-    console.log("Account created for:", data.email);
-
-    // redirect after signup
-    window.location.href = "login.html";
-
-  } catch (error) {
-    console.error(error);
-    alert("Network error");
+  if (!result.ok) {
+    alert(result.data.error || "Signup failed");
+    return;
   }
+
+  console.log("Account created for:", result.data.email);
+
+  window.location.href = "login.html";
 }
 
 
@@ -68,7 +62,6 @@ async function signup(email, password) {
 // FORM HANDLERS
 // =====================
 
-// LOGIN FORM HANDLER
 function handleLogin(event) {
   event.preventDefault();
 
@@ -78,8 +71,6 @@ function handleLogin(event) {
   login(email, password);
 }
 
-
-// SIGNUP FORM HANDLER
 function handleSignup(event) {
   event.preventDefault();
 
