@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
-
-  <link rel="stylesheet" href="login.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-  <div class="login-container">
-    <h2>Login</h2>
+<div class="container">
+    <div class="auth-card">
 
-    <form onsubmit="handleLogin(event)">
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Login to your account</p>
 
-      <div class="input-box">
-        <label>Email</label>
-        <input 
-          type="email" 
-          id="loginEmail" 
-          placeholder="Enter your email"
-          required
-        >
-      </div>
+        <form>
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="Enter your email">
+            </div>
 
-      <div class="input-box">
-        <label>Password</label>
-        <input 
-          type="password" 
-          id="loginPassword" 
-          placeholder="Enter your password"
-          required
-        >
-      </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" placeholder="Enter your password">
+            </div>
 
-      <button type="submit">Login</button>
+            <div class="options">
+                <label class="remember">
+                    <input type="checkbox">
+                    Remember Me
+                </label>
 
-    </form>
+                <a href="#">Forgot Password?</a>
+            </div>
 
-    <div class="extra">
-      Don't have an account?
-      <a href="signup.html">Sign Up</a>
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <button class="social-btn">Continue with Google</button>
+        <button class="social-btn">Continue with GitHub</button>
+
+        <p class="bottom-text">
+            Don't have an account?
+            <a href="signup.html">Sign Up</a>
+        </p>
+
     </div>
-  </div>
-
-  <script src="script.js"></script>
+</div>
 
 </body>
 </html>
