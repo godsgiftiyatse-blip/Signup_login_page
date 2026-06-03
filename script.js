@@ -1,5 +1,5 @@
 // =====================
-// BASE API FUNCTION
+// BASE API
 // =====================
 const API_URL = "https://YOUR-REPLIT-URL.replit.app/api/auth";
 
@@ -15,7 +15,6 @@ async function apiRequest(endpoint, body) {
     });
 
     const data = await res.json();
-
     return { ok: res.ok, data };
 
   } catch (error) {
@@ -28,7 +27,10 @@ async function apiRequest(endpoint, body) {
 // LOGIN
 // =====================
 async function login(email, password) {
-  const result = await apiRequest("login", { email, password });
+  const result = await apiRequest("login", {
+    email: email.trim(),
+    password: password.trim()
+  });
 
   if (!result.ok) {
     alert(result.data.error || "Login failed");
@@ -36,7 +38,6 @@ async function login(email, password) {
   }
 
   console.log("Logged in as:", result.data.email);
-
   window.location.href = "dashboard.html";
 }
 
@@ -45,7 +46,10 @@ async function login(email, password) {
 // SIGNUP
 // =====================
 async function signup(email, password) {
-  const result = await apiRequest("signup", { email, password });
+  const result = await apiRequest("signup", {
+    email: email.trim(),
+    password: password.trim()
+  });
 
   if (!result.ok) {
     alert(result.data.error || "Signup failed");
@@ -53,7 +57,6 @@ async function signup(email, password) {
   }
 
   console.log("Account created for:", result.data.email);
-
   window.location.href = "login.html";
 }
 
@@ -61,21 +64,35 @@ async function signup(email, password) {
 // =====================
 // FORM HANDLERS
 // =====================
-
 function handleLogin(event) {
   event.preventDefault();
+
+  const button = event.target.querySelector("button");
+  button.disabled = true;
+  button.innerText = "Logging in...";
 
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
 
-  login(email, password);
+  login(email, password).finally(() => {
+    button.disabled = false;
+    button.innerText = "Login";
+  });
 }
+
 
 function handleSignup(event) {
   event.preventDefault();
 
+  const button = event.target.querySelector("button");
+  button.disabled = true;
+  button.innerText = "Creating account...";
+
   const email = document.getElementById("signupEmail").value;
   const password = document.getElementById("signupPassword").value;
 
-  signup(email, password);
+  signup(email, password).finally(() => {
+    button.disabled = false;
+    button.innerText = "Sign Up";
+  });
 }
