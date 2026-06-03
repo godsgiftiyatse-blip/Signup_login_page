@@ -1,65 +1,59 @@
 // =====================
-// SUPABASE INIT (FIXED)
+// SUPABASE INIT (FINAL FIX)
 // =====================
 const SUPABASE_URL = "https://hcgmpsmiqpinayzkvavd.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_mmAQ4xNdT_acLKyIN9b9Qw_o3nPTSBj";
 
-// IMPORTANT: use window.supabase from CDN
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 
 // =====================
 // SIGNUP
 // =====================
-async function signup(email, password) {
+window.signup = async function (email, password) {
     const { data, error } = await supabase.auth.signUp({
         email,
         password
     });
 
     if (error) {
-        console.error("Signup error:", error.message);
+        alert("Signup failed: " + error.message);
         throw error;
     }
 
+    alert("Account created! Check your email.");
+    window.location.href = "login.html";
+
     return data;
-}
+};
 
 
 // =====================
 // LOGIN
 // =====================
-async function login(email, password) {
+window.login = async function (email, password) {
     const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
     });
 
     if (error) {
-        console.error("Login error:", error.message);
+        alert("Login failed: " + error.message);
         throw error;
     }
 
+    window.location.href = "dashboard.html";
     return data;
-}
+};
 
 
 // =====================
-// LOGOUT
+// CHECK USER (DASHBOARD)
 // =====================
-async function logout() {
-    await supabase.auth.signOut();
-    window.location.href = "login.html";
-}
+window.checkUser = async function () {
+    const { data } = await supabase.auth.getUser();
 
-
-// =====================
-// CHECK USER (DASHBOARD PROTECTION)
-// =====================
-async function checkUser() {
-    const { data, error } = await supabase.auth.getUser();
-
-    if (error || !data.user) {
+    if (!data.user) {
         window.location.href = "login.html";
         return null;
     }
@@ -70,28 +64,13 @@ async function checkUser() {
     }
 
     return data.user;
-}
+};
 
 
 // =====================
-// AUTO CHECK SESSION (OPTIONAL)
+// LOGOUT
 // =====================
-async function checkSessionRedirect() {
-    const { data } = await supabase.auth.getSession();
-
-    if (data.session) {
-        window.location.href = "dashboard.html";
-    }
-}
-
-
-// =====================
-// OPTIONAL: HANDLE AUTH ROUTING
-// =====================
-async function handleAuth(email, password, mode) {
-    if (mode === "signup") {
-        return await signup(email, password);
-    } else {
-        return await login(email, password);
-    }
-}
+window.logout = async function () {
+    await supabase.auth.signOut();
+    window.location.href = "login.html";
+};
