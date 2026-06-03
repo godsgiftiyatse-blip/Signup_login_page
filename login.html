@@ -1,97 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
 </head>
 
 <body>
 
-<div class="container">
-    <div class="auth-card">
+<h2>Login</h2>
 
-        <h1>Welcome Back</h1>
-        <p class="subtitle">Login to your account</p>
+<input id="email" type="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
 
-        <form onsubmit="handleLogin(event)">
-
-            <div class="input-group">
-                <label>Email Address</label>
-                <input id="loginEmail" type="email" placeholder="Enter your email" required>
-            </div>
-
-            <div class="input-group">
-                <label>Password</label>
-                <input id="loginPassword" type="password" placeholder="Enter your password" required>
-            </div>
-
-            <div class="options">
-                <label class="remember">
-                    <input type="checkbox">
-                    Remember Me
-                </label>
-
-                <a href="#">Forgot Password?</a>
-            </div>
-
-            <button type="submit" class="btn" id="loginBtn">
-                Login
-            </button>
-
-        </form>
-
-        <p class="bottom-text">
-            Don't have an account?
-            <a href="signup.html">Sign Up</a>
-        </p>
-
-    </div>
-</div>
+<button onclick="handleLogin()">Login</button>
 
 <script>
-    // =====================
-    // SUPABASE INIT
-    // =====================
-    const supabaseUrl = "https://hcgmpsmiqpinayzkvavd.supabase.co";
-    const supabaseKey = "sb_publishable_mmAQ4xNdT_acLKyIN9b9Qw_o3nPTSBj";
+function handleLogin() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-
-    // =====================
-    // LOGIN FUNCTION
-    // =====================
-    async function handleLogin(event) {
-        event.preventDefault();
-
-        const btn = document.getElementById("loginBtn");
-        btn.disabled = true;
-        btn.innerText = "Logging in...";
-
-        const email = document.getElementById("loginEmail").value;
-        const password = document.getElementById("loginPassword").value;
-
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: email.trim(),
-            password: password.trim()
-        });
-
-        if (error) {
-            alert(error.message);
-            btn.disabled = false;
-            btn.innerText = "Login";
-            return;
-        }
-
-        // success
-        window.location.href = "dashboard.html";
+    if (!email || !password) {
+        alert("Please fill all fields");
+        return;
     }
+
+    login(email, password);
+}
 </script>
 
 </body>
