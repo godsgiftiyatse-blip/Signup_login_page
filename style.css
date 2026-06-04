@@ -202,18 +202,18 @@ color:#93c5fd;
 
 @media(max-width:480px){
 
-.auth-card{  
-    padding:30px 25px;  
-}  
+.auth-card{
+padding:30px 25px;
+}
 
-h1{  
-    font-size:1.8rem;  
-}  
+h1{
+font-size:1.8rem;
+}
 
-.options{  
-    flex-direction:column;  
-    gap:10px;  
-    align-items:flex-start;  
+.options{
+flex-direction:column;
+gap:10px;
+align-items:flex-start;
 }
 
 }
