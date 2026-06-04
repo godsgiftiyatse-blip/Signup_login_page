@@ -85,3 +85,124 @@ input:focus{
     font-weight:bold;
     cursor:pointer;
 }
+
+.login-btn:hover{
+    opacity:.95;
+}
+
+.forgot{
+    display:block;
+    text-align:center;
+    margin:15px 0;
+    text-decoration:none;
+    color:#1877f2;
+}
+
+hr{
+    border:none;
+    border-top:1px solid #ddd;
+    margin:20px 0;
+}
+
+.signup-btn{
+    display:block;
+    margin:auto;
+    border:none;
+    padding:14px 18px;
+    border-radius:6px;
+    background:#42b72a;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.signup-btn:hover{
+    opacity:.95;
+}
+
+.page-text{
+    text-align:center;
+    margin-top:25px;
+    color:#1c1e21;
+    font-size:14px;
+}
+
+.page-text strong{
+    font-weight:700;
+}
+
+@media(max-width:900px){
+
+.container{
+    flex-direction:column;
+    text-align:center;
+}
+
+.right{
+    width:100%;
+    max-width:400px;
+}
+
+.logo{
+    font-size:3rem;
+}
+
+.tagline{
+    font-size:1.4rem;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="left">
+        <div class="logo">FRISCO</div>
+
+        <div class="tagline">
+            Connect with friends, share moments,
+            and discover what's happening around you.
+        </div>
+    </div>
+
+    <div class="right">
+
+        <div class="card">
+
+            <input type="email"
+                   placeholder="Email address">
+
+            <input type="password"
+                   placeholder="Password">
+
+            <button class="login-btn">
+                Log In
+            </button>
+
+            <a href="#" class="forgot">
+                Forgotten password?
+            </a>
+
+            <hr>
+
+            <button class="signup-btn"
+                    onclick="location.href='signup.html'">
+                Create New Account
+            </button>
+
+        </div>
+
+        <div class="page-text">
+            <strong>Create a page</strong> for a business,
+            brand or community.
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+    </html>
