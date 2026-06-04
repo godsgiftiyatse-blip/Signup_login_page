@@ -1,185 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Frisco - Welcome</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+font-family:'Poppins',sans-serif;
 }
 
 body{
 min-height:100vh;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
+padding:20px;
 background:
-radial-gradient(circle at top, rgba(59,130,246,0.12), transparent 45%),
-radial-gradient(circle at bottom, rgba(6,182,212,0.10), transparent 45%),
-#0b1220;
-color:#e5e7eb;
-overflow:hidden;
-position:relative;
-}
-
-/* subtle noise overlay feel */
-body::before{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(transparent, rgba(255,255,255,0.02));
-pointer-events:none;
-}
-
-/* soft floating light */
-.glow{
-position:absolute;
-width:420px;
-height:420px;
-border-radius:50%;
-filter:blur(120px);
-opacity:0.25;
-}
-
-.glow.one{
-background:#3b82f6;
-top:-120px;
-left:-120px;
-}
-
-.glow.two{
-background:#06b6d4;
-bottom:-140px;
-right:-140px;
+radial-gradient(circle at top left,#3b82f6 0%,transparent 35%),
+radial-gradient(circle at bottom right,#06b6d4 0%,transparent 35%),
+linear-gradient(135deg,#020617,#0f172a,#1e293b);
 }
 
 .container{
-text-align:center;
-max-width:780px;
-padding:40px 24px;
-position:relative;
-z-index:2;
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
+.auth-card{
+width:100%;
+max-width:450px;
+padding:40px;
+border-radius:28px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,0.15);
+box-shadow:
+0 15px 40px rgba(0,0,0,0.35),
+0 0 25px rgba(59,130,246,0.18);
+transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.auth-card:hover{
+transform:translateY(-4px);
+box-shadow:
+0 20px 50px rgba(0,0,0,0.4),
+0 0 30px rgba(59,130,246,0.25);
+}
+
+/* BRAND */
 .brand{
-font-size:12px;
-letter-spacing:10px;
-text-transform:uppercase;
-color:#9ca3af;
-margin-bottom:22px;
+text-align:center;
+margin-bottom:30px;
 }
 
-h1{
-font-size:3.2rem;
-font-weight:700;
-line-height:1.1;
-color:#f9fafb;
+.brand h1{
+font-size:2.8rem;
+letter-spacing:3px;
+background:linear-gradient(135deg,#60a5fa,#a78bfa,#22d3ee);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:6px;
+}
+
+.tagline{
+color:#e2e8f0;
+font-size:14px;
+letter-spacing:3px;
+text-transform:uppercase;
+opacity:0.85;
+margin-bottom:6px;
+}
+
+.slogan{
+color:#93c5fd;
+font-size:13px;
+font-style:italic;
+opacity:0.9;
+}
+
+/* INPUTS */
+.input-group{
 margin-bottom:18px;
 }
 
-h1 span{
-background:linear-gradient(90deg,#60a5fa,#22d3ee);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+.input-group label{
+display:block;
+color:#fff;
+margin-bottom:8px;
+font-weight:500;
 }
 
-.motto{
-font-size:1.15rem;
-color:#cbd5e1;
-line-height:1.6;
-margin-bottom:38px;
-}
-
-.motto strong{
-color:#f9fafb;
-font-weight:600;
-}
-
-.buttons{
-display:flex;
-justify-content:center;
-gap:14px;
-flex-wrap:wrap;
-}
-
-button{
-padding:13px 26px;
-border-radius:999px;
-font-size:14px;
-font-weight:600;
-cursor:pointer;
-transition:all 0.25s ease;
+.input-group input{
+width:100%;
+padding:15px;
 border:none;
+outline:none;
+border-radius:14px;
+background:rgba(255,255,255,0.12);
+color:#fff;
+font-size:15px;
+border:1px solid transparent;
+transition:.25s ease;
 }
 
-.primary{
-background:#f9fafb;
-color:#0b1220;
-box-shadow:0 10px 25px rgba(0,0,0,0.25);
+.input-group input::placeholder{
+color:#cbd5e1;
 }
 
-.primary:hover{
+.input-group input:focus{
+border-color:#3b82f6;
+background:rgba(255,255,255,0.16);
+box-shadow:0 0 0 3px rgba(59,130,246,0.25);
+}
+
+/* OPTIONS */
+.options{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:15px 0 25px;
+color:white;
+font-size:14px;
+}
+
+.remember{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.options a{
+color:#93c5fd;
+text-decoration:none;
+}
+
+.options a:hover{
+color:#bfdbfe;
+}
+
+/* BUTTON */
+.btn{
+width:100%;
+border:none;
+cursor:pointer;
+padding:15px;
+border-radius:14px;
+font-size:16px;
+font-weight:600;
+color:white;
+background:linear-gradient(135deg,#2563eb,#3b82f6);
+transition:all .25s ease;
+}
+
+.btn:hover{
 transform:translateY(-2px);
+box-shadow:0 10px 20px rgba(37,99,235,0.25);
 }
 
-.secondary{
-background:rgba(255,255,255,0.06);
-border:1px solid rgba(255,255,255,0.12);
-color:#e5e7eb;
-backdrop-filter:blur(10px);
-}
-
-.secondary:hover{
-background:rgba(255,255,255,0.10);
-transform:translateY(-2px);
-}
-
-button:active{
+.btn:active{
 transform:scale(0.98);
 }
 
-footer{
-margin-top:45px;
-font-size:12px;
-color:#6b7280;
+/* DIVIDER */
+.divider{
+display:flex;
+align-items:center;
+margin:25px 0;
 }
 
-@media(max-width:600px){
-h1{font-size:2.3rem;}
-.motto{font-size:1rem;}
+.divider::before,
+.divider::after{
+content:"";
+flex:1;
+height:1px;
+background:rgba(255,255,255,0.2);
+}
+
+.divider span{
+color:white;
+padding:0 12px;
+font-size:13px;
+opacity:0.8;
+}
+
+/* SOCIAL */
+.social-btn{
+width:100%;
+padding:14px;
+margin-bottom:10px;
+border-radius:14px;
+cursor:pointer;
+color:white;
+font-size:15px;
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.15);
+transition:.25s ease;
+}
+
+.social-btn:hover{
+background:rgba(255,255,255,0.18);
+transform:translateY(-1px);
+}
+
+/* BOTTOM */
+.bottom-text{
+text-align:center;
+margin-top:20px;
+color:#cbd5e1;
+}
+
+.bottom-text a{
+color:#60a5fa;
+text-decoration:none;
+font-weight:600;
+}
+
+.bottom-text a:hover{
+color:#93c5fd;
+}
+
+/* MOBILE */
+@media(max-width:480px){
+.auth-card{
+padding:30px 22px;
+}
+
+.brand h1{
+font-size:2.3rem;
+}
+
+.options{
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
+}
 }
 </style>
 </head>
 
 <body>
 
-<div class="glow one"></div>
-<div class="glow two"></div>
-
 <div class="container">
+  <div class="auth-card">
 
-    <div class="brand">FRISCO</div>
-
-    <h1>Welcome to <span>Frisco</span></h1>
-
-    <p class="motto">
-        <strong>Be you.</strong> Be real. Be Frisco.
-    </p>
-
-    <div class="buttons">
-        <button class="primary">Get Started</button>
-        <button class="secondary">Explore</button>
+    <!-- BRAND -->
+    <div class="brand">
+      <h1>Frisco</h1>
+      <div class="tagline">Welcome to Frisco</div>
+      <div class="slogan">Be You. Be Real. Be Frisco.</div>
     </div>
 
-    <footer>
-        © 2026 Frisco. Designed for authenticity.
-    </footer>
+    <!-- FORM -->
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" placeholder="you@frisco.com">
+    </div>
 
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" placeholder="Enter your password">
+    </div>
+
+    <div class="options">
+      <label class="remember">
+        <input type="checkbox">
+        Remember me
+      </label>
+      <a href="#">Forgot password?</a>
+    </div>
+
+    <button class="btn">Sign In to Frisco</button>
+
+    <div class="divider">
+      <span>or continue with</span>
+    </div>
+
+    <button class="social-btn">Continue with Google</button>
+    <button class="social-btn">Continue with Apple</button>
+
+    <div class="bottom-text">
+      New to Frisco? <a href="#">Create account</a>
+    </div>
+
+  </div>
 </div>
 
 </body>
