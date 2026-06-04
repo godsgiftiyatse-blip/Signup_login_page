@@ -3,42 +3,160 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FRISCO - Welcome</title>
-<link rel="stylesheet" href="style.css">
+<title>Frisco - Welcome</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:
+radial-gradient(circle at top left,#3b82f6 0%,transparent 40%),
+radial-gradient(circle at bottom right,#06b6d4 0%,transparent 40%),
+linear-gradient(135deg,#020617,#0f172a,#111827);
+color:white;
+overflow:hidden;
+position:relative;
+}
+
+/* glowing background orbs */
+.orb{
+position:absolute;
+width:280px;
+height:280px;
+border-radius:50%;
+filter:blur(90px);
+opacity:0.4;
+}
+
+.orb.one{
+background:#3b82f6;
+top:10%;
+left:10%;
+}
+
+.orb.two{
+background:#06b6d4;
+bottom:10%;
+right:10%;
+}
+
+.container{
+text-align:center;
+z-index:2;
+max-width:700px;
+padding:20px;
+}
+
+.brand{
+letter-spacing:8px;
+font-size:14px;
+opacity:0.7;
+margin-bottom:20px;
+}
+
+h1{
+font-size:3rem;
+margin-bottom:15px;
+}
+
+h1 span{
+background:linear-gradient(90deg,#3b82f6,#06b6d4);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.motto{
+font-size:1.2rem;
+color:#cbd5e1;
+margin-bottom:35px;
+}
+
+.motto strong{
+color:white;
+}
+
+.buttons{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+button{
+padding:14px 24px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-size:15px;
+font-weight:600;
+transition:0.25s ease;
+}
+
+.primary{
+background:linear-gradient(135deg,#2563eb,#3b82f6);
+color:white;
+box-shadow:0 10px 25px rgba(37,99,235,0.3);
+}
+
+.secondary{
+background:rgba(255,255,255,0.08);
+color:white;
+border:1px solid rgba(255,255,255,0.15);
+}
+
+button:hover{
+transform:translateY(-3px);
+}
+
+button:active{
+transform:scale(0.98);
+}
+
+footer{
+margin-top:40px;
+font-size:12px;
+opacity:0.6;
+}
+
+@media(max-width:600px){
+h1{font-size:2.2rem;}
+.motto{font-size:1rem;}
+}
+</style>
 </head>
+
 <body>
+
+<div class="orb one"></div>
+<div class="orb two"></div>
 
 <div class="container">
 
-    <!-- LEFT INFO SECTION -->
-    <div class="left">
-        <h1>FRISCO</h1>
-        <p class="tagline">
-            Connect with friends, share moments, and explore what’s happening around you.
-        </p>
+    <div class="brand">FRISCO</div>
+
+    <h1>Welcome to <span>Frisco</span></h1>
+
+    <p class="motto">
+        <strong>Be you.</strong> Be real. Be Frisco.
+    </p>
+
+    <div class="buttons">
+        <button class="primary">Get Started</button>
+        <button class="secondary">Explore</button>
     </div>
 
-    <!-- RIGHT LOGIN SECTION -->
-    <div class="right">
-
-        <div class="card">
-            <input type="text" placeholder="Email or Phone">
-            <input type="password" placeholder="Password">
-
-            <button class="login-btn">Log In</button>
-
-            <a href="#" class="forgot">Forgot Password?</a>
-
-            <hr>
-
-            <button class="create-btn">Create New Account</button>
-        </div>
-
-        <p class="create-page">
-            <b>Create a Page</b> for a celebrity, brand or business.
-        </p>
-
-    </div>
+    <footer>
+        © 2026 Frisco — Built for authenticity
+    </footer>
 
 </div>
 
