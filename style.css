@@ -31,10 +31,19 @@ padding:40px;
 border-radius:28px;
 background:rgba(255,255,255,0.08);
 backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
 border:1px solid rgba(255,255,255,0.15);
 box-shadow:
 0 15px 40px rgba(0,0,0,0.35),
-0 0 20px rgba(59,130,246,0.15);
+0 0 25px rgba(59,130,246,0.18);
+transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.auth-card:hover{
+transform:translateY(-4px);
+box-shadow:
+0 20px 50px rgba(0,0,0,0.4),
+0 0 30px rgba(59,130,246,0.25);
 }
 
 h1{
@@ -42,6 +51,7 @@ color:#fff;
 text-align:center;
 font-size:2.2rem;
 margin-bottom:8px;
+letter-spacing:0.5px;
 }
 
 .subtitle{
@@ -71,16 +81,18 @@ background:rgba(255,255,255,0.12);
 color:#fff;
 font-size:15px;
 border:1px solid transparent;
-transition:.3s;
+transition:.25s ease;
 }
 
 .input-group input::placeholder{
 color:#cbd5e1;
+opacity:0.8;
 }
 
 .input-group input:focus{
 border-color:#3b82f6;
-background:rgba(255,255,255,0.15);
+background:rgba(255,255,255,0.16);
+box-shadow:0 0 0 3px rgba(59,130,246,0.25);
 }
 
 .options{
@@ -90,6 +102,7 @@ align-items:center;
 margin:15px 0 25px;
 color:white;
 font-size:14px;
+gap:10px;
 }
 
 .remember{
@@ -101,6 +114,11 @@ gap:8px;
 .options a{
 color:#93c5fd;
 text-decoration:none;
+transition:.2s ease;
+}
+
+.options a:hover{
+color:#bfdbfe;
 }
 
 .btn{
@@ -112,16 +130,17 @@ border-radius:14px;
 font-size:17px;
 font-weight:600;
 color:white;
-background:linear-gradient(
-135deg,
-#2563eb,
-#3b82f6
-);
-transition:.3s;
+background:linear-gradient(135deg,#2563eb,#3b82f6);
+transition:all .25s ease;
 }
 
 .btn:hover{
 transform:translateY(-2px);
+box-shadow:0 10px 20px rgba(37,99,235,0.25);
+}
+
+.btn:active{
+transform:translateY(0) scale(0.98);
 }
 
 .divider{
@@ -141,6 +160,8 @@ background:rgba(255,255,255,0.2);
 .divider span{
 color:white;
 padding:0 15px;
+font-size:13px;
+opacity:0.9;
 }
 
 .social-btn{
@@ -154,11 +175,12 @@ color:white;
 font-size:15px;
 background:rgba(255,255,255,0.12);
 border:1px solid rgba(255,255,255,0.15);
-transition:.3s;
+transition:.25s ease;
 }
 
 .social-btn:hover{
 background:rgba(255,255,255,0.18);
+transform:translateY(-1px);
 }
 
 .bottom-text{
@@ -171,6 +193,11 @@ color:#cbd5e1;
 color:#60a5fa;
 text-decoration:none;
 font-weight:600;
+transition:.2s ease;
+}
+
+.bottom-text a:hover{
+color:#93c5fd;
 }
 
 @media(max-width:480px){
